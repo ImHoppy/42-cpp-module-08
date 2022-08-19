@@ -44,8 +44,11 @@ void		Span::addNumber(int n)
 {
 	if (this->_size >= this->_max)
 		throw std::exception();
+#ifndef DEBUG
 	this->_lst.push_back(n);
-//	this->_lst.insert(std::lower_bound(_lst.begin(), _lst.end(), n), n);
+#else
+	this->_lst.insert(std::lower_bound(_lst.begin(), _lst.end(), n), n);
+#endif
 	++this->_size;
 }
 
@@ -53,14 +56,13 @@ int			Span::shortestSpan() const
 {
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	int j, i = 0;
 	unsigned int n = (2^31) - 1;
 
-	for (it = _lst.begin(); it != _lst.end(); ++it, ++i)
+	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
-		for (it1 = _lst.begin(), j = 0; it1 != _lst.end(); ++it1, ++j)
+		for (it1 = it; it1 != _lst.end(); ++it1)
 		{
-			if (i != j && n > static_cast<unsigned int>(*it1-*it))
+			if (it != it1 && n > static_cast<unsigned int>(*it1-*it))
 				n = static_cast<unsigned int>(*it1-*it);
 		}
 	}
@@ -70,17 +72,21 @@ int			Span::shortestSpan() const
 }
 int			Span::longestSpan() const
 {
+#ifdef DEBUG
+	if (_size < 2)
+		throw std::exception();
+	return (*(_lst.end()-1) - *_lst.begin());
+#endif
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	int j, i = 0;
 	int n = -1;
 
-	for (it = _lst.begin(); it != _lst.end(); ++it, ++i)
+	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
-		for (it1 = _lst.begin(), j = 0; it1 != _lst.end(); ++it1, ++j)
+		for (it1 = it; it1 != _lst.end(); ++it1)
 		{
-			if (i != j && n < *it1-*it)
-				n = *it1-*it;
+			if (it != it1 && n < *it1 - *it)
+				n = *it1 - *it;
 		}
 	}
 	if (n == -1)
