@@ -4,7 +4,7 @@
 # include <iostream>
 # include <string>
 # include <vector>
-
+// TODO: plage d’itérateurs sur le contructor
 class Span
 {
 
