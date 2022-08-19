@@ -60,9 +60,9 @@ int			Span::shortestSpan() const
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
-		for (it1 = it; it1 != _lst.end(); ++it1)
+		for (it1 = (it+1); it1 != _lst.end(); ++it1)
 		{
-			if (it != it1 && n > static_cast<unsigned int>(*it1-*it))
+			if (n > static_cast<unsigned int>(*it1-*it))
 				n = static_cast<unsigned int>(*it1-*it);
 		}
 	}
@@ -83,9 +83,9 @@ int			Span::longestSpan() const
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
-		for (it1 = it; it1 != _lst.end(); ++it1)
+		for (it1 = (it+1); it1 != _lst.end(); ++it1)
 		{
-			if (it != it1 && n < *it1 - *it)
+			if (n < *it1 - *it)
 				n = *it1 - *it;
 		}
 	}
