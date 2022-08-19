@@ -13,6 +13,7 @@ Span::Span( const Span & src )
 
 Span::Span( const unsigned int & max ) : _size(0), _max(max)
 {
+	_lst.reserve(max);
 }
 
 
