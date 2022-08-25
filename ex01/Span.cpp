@@ -16,6 +16,13 @@ Span::Span( const unsigned int & max ) : _size(0), _max(max)
 	_lst.reserve(max);
 }
 
+Span::Span(InputIterator first, InputIterator last)
+{
+	_size = 0;
+	_max = 0;
+	_lst.reserve(last - first);
+}
+
 
 /* ------------------------------- DESTRUCTOR ------------------------------- */
 
