@@ -16,14 +16,6 @@ Span::Span( const unsigned int & max ) : _size(0), _max(max)
 	_lst.reserve(max);
 }
 
-Span::Span(InputIterator first, InputIterator last)
-{
-	_size = 0;
-	_max = 0;
-	_lst.reserve(last - first);
-}
-
-
 /* ------------------------------- DESTRUCTOR ------------------------------- */
 
 Span::~Span()
@@ -50,7 +42,7 @@ Span &				Span::operator=( Span const & rhs )
 void		Span::addNumber(int n)
 {
 	if (this->_size >= this->_max)
-		throw std::exception();
+		throw std::runtime_error("max of Span");
 #ifndef DEBUG
 	this->_lst.push_back(n);
 #else
@@ -63,7 +55,7 @@ int			Span::shortestSpan() const
 {
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	unsigned int n = (2^31) - 1;
+	unsigned int n = (0x2^31) - 1;
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
@@ -73,8 +65,8 @@ int			Span::shortestSpan() const
 				n = static_cast<unsigned int>(*it1-*it);
 		}
 	}
-	if (n == (2^31) - 1)
-		throw std::exception();
+	if (n == (0x2^31) - 1)
+		throw std::runtime_error("Not enought numbers");
 	return n;
 }
 int			Span::longestSpan() const
@@ -97,7 +89,7 @@ int			Span::longestSpan() const
 		}
 	}
 	if (n == -1)
-		throw std::exception();
+		throw std::runtime_error("Not enought numbers");
 	return n;
 }
 

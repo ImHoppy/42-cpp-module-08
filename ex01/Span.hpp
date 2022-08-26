@@ -9,7 +9,6 @@ class Span
 {
 
 	public:
-        vector (InputIterator first, InputIterator last);
 		Span();
 		Span( const Span & src );
 		Span( const unsigned int & max );
@@ -17,11 +16,18 @@ class Span
 		// the iterator constructor can also be used to construct from arrays:
 		int myints[] = {16,2,77,29};
 		std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
+		// vector (InputIterator first, InputIterator last);
 
 		Span( std::vector<int>::const_iterator );
 		*/
-		template <class InputIterator>
-		Span(InputIterator first, InputIterator last);
+		template<class InputIterator>
+		Span(InputIterator first, InputIterator last) {
+			_size = 0;
+			_max = last - first;
+			_lst.reserve(last - first);
+			for (InputIterator it = first; it != last; ++it)
+				addNumber(*it);
+		};
 		~Span();
 
 		Span &		operator=( const Span & rhs );

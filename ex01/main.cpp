@@ -12,7 +12,7 @@ void	CreateBigSpan(void)
 	srand(time(NULL));
 	Span big(10000);
 	for (int i = 0; i < 10000; ++i)
-		big.addNumber(rand() % 10000);
+		big.addNumber(rand());
 	std::cout << PURPLE("Shortest span on 10000 numbers: ") << GREEN(big.shortestSpan()) << std::endl;
 	std::cout << PURPLE("Longest span on 10000 numbers: ") << GREEN(big.longestSpan()) << std::endl;
 }
@@ -46,5 +46,12 @@ int	main(void)
 	std::cout << PURPLE("3 number with negative shortest span: ") << GREEN(sp.shortestSpan()) << std::endl;
 	std::cout << PURPLE("3 number with negative longest span: ") << GREEN(sp.longestSpan()) << std::endl;
 	CreateBigSpan();
+
+	std::cout << PURPLE("\nSubject main but with range of iterator") << std::endl;
+	int myints[] = {6, 3, 17, 9, 11};
+	sp = Span( myints, myints + sizeof(myints) / sizeof(int) );
+
+	std::cout << PURPLE("shortest span: ") << GREEN(sp.shortestSpan()) << std::endl;
+	std::cout << PURPLE("longest span: ") << GREEN(sp.longestSpan()) << std::endl;
 	return 0;
 }
