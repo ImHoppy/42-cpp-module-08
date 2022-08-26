@@ -53,9 +53,11 @@ void		Span::addNumber(int n)
 
 int			Span::shortestSpan() const
 {
+	if (_size < 2)
+		throw std::runtime_error("Not enought numbers shortestSpan");
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	long n = (0x2^32);
+	long n = (0x2^60);
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
@@ -65,8 +67,6 @@ int			Span::shortestSpan() const
 				n = static_cast<long>(std::max(*it1, *it) - std::min(*it1, *it));
 		}
 	}
-	if (n == (0x2^32))
-		throw std::runtime_error("Not enought numbers");
 	return n;
 }
 int			Span::longestSpan() const
@@ -78,7 +78,7 @@ int			Span::longestSpan() const
 #endif
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	long n = (0x2^32) * -1;
+	long n = -1;
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
@@ -88,8 +88,8 @@ int			Span::longestSpan() const
 				n = static_cast<long>(std::max(*it1, *it) - std::min(*it1, *it));
 		}
 	}
-	if (n == (0x2^32) * -1)
-		throw std::runtime_error("Not enought numbers");
+	if (n == -1)
+		throw std::runtime_error("Not enought numbers longestSpan");
 	return n;
 }
 
