@@ -55,17 +55,17 @@ int			Span::shortestSpan() const
 {
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	unsigned int n = (0x2^31) - 1;
+	long n = (0x2^32);
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
 		for (it1 = (it+1); it1 != _lst.end(); ++it1)
 		{
-			if (n > static_cast<unsigned int>(*it1-*it))
-				n = static_cast<unsigned int>(*it1-*it);
+			if (n > static_cast<long>(std::max(*it1, *it) - std::min(*it1, *it)))
+				n = static_cast<long>(std::max(*it1, *it) - std::min(*it1, *it));
 		}
 	}
-	if (n == (0x2^31) - 1)
+	if (n == (0x2^32))
 		throw std::runtime_error("Not enought numbers");
 	return n;
 }
@@ -78,17 +78,17 @@ int			Span::longestSpan() const
 #endif
 	std::vector<int>::const_iterator it;
 	std::vector<int>::const_iterator it1;
-	int n = -1;
+	long n = (0x2^32) * -1;
 
 	for (it = _lst.begin(); it != _lst.end(); ++it)
 	{
 		for (it1 = (it+1); it1 != _lst.end(); ++it1)
 		{
-			if (n < *it1 - *it)
-				n = *it1 - *it;
+			if (n < static_cast<long>(std::max(*it1, *it) - std::min(*it1, *it)))
+				n = static_cast<long>(std::max(*it1, *it) - std::min(*it1, *it));
 		}
 	}
-	if (n == -1)
+	if (n == (0x2^32) * -1)
 		throw std::runtime_error("Not enought numbers");
 	return n;
 }

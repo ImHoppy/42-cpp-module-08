@@ -45,6 +45,7 @@ int	main(void)
 	sp.addNumber(3);
 	std::cout << PURPLE("3 number with negative shortest span: ") << GREEN(sp.shortestSpan()) << std::endl;
 	std::cout << PURPLE("3 number with negative longest span: ") << GREEN(sp.longestSpan()) << std::endl;
+
 	CreateBigSpan();
 
 	std::cout << PURPLE("\nSubject main but with range of iterator") << std::endl;
