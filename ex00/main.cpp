@@ -20,7 +20,7 @@ int	main(void)
 	std::list<int> a;
 	a.push_back(1);
 	a.push_back(42);
-	
+	std::cout << PURPLE("[1, 42]\n");
 	test("list", a, 1);
 	test("list", a, 21);
 	test("list", a, 42);
@@ -32,6 +32,7 @@ int	main(void)
 	b.push_back(3);
 	b.push_back(9);
 
+	std::cout << PURPLE("[-5, 3, 9]\n");
 	test("vector", b, 4);
 	test("vector", b, -5);
 	test("vector", b, 9);
@@ -43,6 +44,7 @@ int	main(void)
 	c.insert('0');
 	c.insert('v');
 
+	std::cout << PURPLE("[I, 0, v]\n");
 	test("set", c, 'I');
 	test("set", c, '!');
 	test("set", c, 'v');
